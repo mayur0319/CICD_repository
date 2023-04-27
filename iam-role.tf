@@ -79,6 +79,32 @@ data "aws_iam_policy_document" "cicd-build-policies" {
     resources = ["*"]
     effect    = "Allow"
   }
+  statement {
+    sid = ""
+    actions = [ "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"]
+    resources = ["*"]
+    effect    = "Allow"
+  }
+
+    statement {
+    sid = ""
+    actions = [ "codebuild:CreateReportGroup",
+                "codebuild:CreateReport",
+                "codebuild:UpdateReport",
+                "codebuild:BatchPutTestCases",
+                "codebuild:BatchPutCodeCoverages"]
+    resources = ["*"]
+    effect    = "Allow"
+  }
+
+      statement {
+    sid = ""
+    actions = ["secretsmanager:GetSecretValue"]
+    resources = ["*"]
+    effect    = "Allow"
+  }
 }
 
 resource "aws_iam_policy" "cicd-build-policy" {
@@ -98,7 +124,12 @@ resource "aws_iam_role_policy_attachment" "tf-cicd-codebuild-attachment2" {
   role       = aws_iam_role.codepipeline-iam-role.id
 }
 
-resource "aws_iam_role_policy_attachment" "cloudwatch-policy" {
-  policy_arn = "arn:aws:iam::aws:policy/CloudWatchFullAccess"
-  role       = aws_iam_role.codebuild-role.name
-}
+# resource "aws_iam_role_policy_attachment" "cloudwatch-policy" {
+#   policy_arn = "arn:aws:iam::aws:policy/CloudWatchFullAccess"
+#   role       = aws_iam_role.codebuild-role.name
+# }
+
+# resource "aws_iam_role_policy_attachment" "secrets_manager_attachment" {
+#   policy_arn = "arn:aws:iam::aws:policy/SecretsManagerReadWrite"
+#   role       = aws_iam_role.codebuild-role.name
+# }
