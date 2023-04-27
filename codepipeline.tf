@@ -1,5 +1,5 @@
-resource "aws_codebuild_project" "tf-plan" {
-  name          = "cicd-plan"
+resource "aws_codebuild_project" "tf-cicd-plan" {
+  name          = "tf-cicd-plan"
   description   = "Plan stage for terraform"
   service_role  = aws_iam_role.codebuild-role.arn
 
@@ -21,10 +21,17 @@ resource "aws_codebuild_project" "tf-plan" {
      type   = "CODEPIPELINE"
      buildspec = file("buildspec/plan-buildspec.yml")
  }
+
+   logs_config {
+    cloudwatch_logs {
+      group_name  = "cicd-plan-log-group"
+      stream_name = "cicd-plan-log-stream"
+    }
+  }
 }
 
 resource "aws_codebuild_project" "tf-apply" {
-  name          = "cicd-apply"
+  name          = "tf-cicd-apply"
   description   = "Apply stage for terraform"
   service_role  = aws_iam_role.codebuild-role.arn
 
@@ -46,11 +53,19 @@ resource "aws_codebuild_project" "tf-apply" {
      type   = "CODEPIPELINE"
      buildspec = file("buildspec/apply-buildspec.yml")
  }
+
+    logs_config {
+    cloudwatch_logs {
+      group_name  = "cicd-apply-log-group"
+      stream_name = "cicd-apply-log-stream"
+    }
+  }
 }
+
 
 resource "aws_codepipeline" "cicd_pipeline" {
 
-    name = "tf-cicd"
+    name = "tf-test-pipeline"
     role_arn = aws_iam_role.codepipeline-iam-role.arn
 
     artifact_store {
@@ -66,7 +81,7 @@ resource "aws_codepipeline" "cicd_pipeline" {
             owner = "AWS"
             provider = "CodeStarSourceConnection"
             version = "1"
-            output_artifacts = ["tf-code"]
+            output_artifacts = ["source_output"]
             configuration = {
                 FullRepositoryId = "mayur0319/CICD_repository"
                 BranchName   = "main"
@@ -84,7 +99,8 @@ resource "aws_codepipeline" "cicd_pipeline" {
             provider = "CodeBuild"
             version = "1"
             owner = "AWS"
-            input_artifacts = ["tf-code"]
+            input_artifacts = ["source_output"]
+            output_artifacts = ["build_output"]
             configuration = {
                 ProjectName = "tf-cicd-plan"
             }
@@ -99,7 +115,7 @@ resource "aws_codepipeline" "cicd_pipeline" {
             provider = "CodeBuild"
             version = "1"
             owner = "AWS"
-            input_artifacts = ["tf-code"]
+            input_artifacts = ["build_output"]
             configuration = {
                 ProjectName = "tf-cicd-apply"
             }
