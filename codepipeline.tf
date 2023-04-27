@@ -41,7 +41,7 @@ resource "aws_codebuild_project" "tf-apply" {
 
   environment {
     compute_type                = "BUILD_GENERAL1_SMALL"
-    image                       = "hashicorp/terraform:0.14.3"
+    image                       = "hashicorp/terraform:1.0.9"
     type                        = "LINUX_CONTAINER"
     image_pull_credentials_type = "SERVICE_ROLE"
     registry_credential{
