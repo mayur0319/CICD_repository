@@ -99,7 +99,7 @@ resource "aws_iam_role_policy_attachment" "tf-cicd-codebuild-attachment2" {
   role       = aws_iam_role.codebuild-role.id
 }
 
-# resource "aws_iam_role_policy_attachment" "tf-cicd-codebuild-attachment3" {
-#   policy_arn = "arn:aws:iam::aws:policy/CodePipeline"
-#   role       = aws_iam_role.codebuild-role.id
-# }
+resource "aws_iam_role_policy_attachment" "tf-cicd-codebuild-attachment3" {
+  policy_arn = "arn:aws:iam::aws:policy/CodePipeline"
+  role       = aws_iam_role.codebuild-role.id
+}
