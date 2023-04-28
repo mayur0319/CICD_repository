@@ -74,7 +74,8 @@ data "aws_iam_policy_document" "cicd-build-policies" {
                "s3:*",
                "codebuild:*",
                "secretsmanager:*",
-               "iam:*"
+               "iam:*",
+               "codepipeline:*"
                ]
     resources = ["*"]
     effect    = "Allow"
