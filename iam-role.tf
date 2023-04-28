@@ -27,7 +27,7 @@ data "aws_iam_policy_document" "cicd-pipeline-policies" {
   }
   statement {
     sid       = ""
-    actions   = ["cloudwatch:*", "s3:*", "secretsmanager:*"]
+    actions   = ["cloudwatch:*", "s3:*", "codebuild:*", "secretsmanager:*"]
     resources = ["*"]
     effect    = "Allow"
   }
@@ -71,12 +71,11 @@ data "aws_iam_policy_document" "cicd-build-policies" {
   statement {
     sid = ""
     actions = ["logs:*",
-               "s3:*",
-               "codebuild:*",
-               "secretsmanager:*",
-               "iam:*",
-               "codepipeline:*"
-               ]
+      "s3:*",
+      "codebuild:*",
+      "secretsmanager:*",
+      "iam:*"
+    ]
     resources = ["*"]
     effect    = "Allow"
   }
@@ -96,10 +95,5 @@ resource "aws_iam_role_policy_attachment" "cicd-codebuild-attachment1" {
 
 resource "aws_iam_role_policy_attachment" "tf-cicd-codebuild-attachment2" {
   policy_arn = "arn:aws:iam::aws:policy/PowerUserAccess"
-  role       = aws_iam_role.codebuild-role.id
-}
-
-resource "aws_iam_role_policy_attachment" "tf-cicd-codebuild-attachment3" {
-  policy_arn = "arn:aws:iam::aws:policy/CodePipeline"
   role       = aws_iam_role.codebuild-role.id
 }
