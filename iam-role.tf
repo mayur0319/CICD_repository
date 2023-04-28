@@ -27,7 +27,7 @@ data "aws_iam_policy_document" "cicd-pipeline-policies" {
   }
   statement {
     sid       = ""
-    actions   = ["cloudwatch:*", "s3:*", "codebuild:*", "secretsmanager:*"]
+    actions   = ["cloudwatch:*", "s3:*", "codepipeline:*", "secretsmanager:*"]
     resources = ["*"]
     effect    = "Allow"
   }
