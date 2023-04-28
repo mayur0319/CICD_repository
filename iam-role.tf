@@ -94,10 +94,10 @@ resource "aws_iam_role_policy_attachment" "cicd-codebuild-attachment1" {
   role       = aws_iam_role.codebuild-role.id
 }
 
-# resource "aws_iam_role_policy_attachment" "tf-cicd-codebuild-attachment2" {
-#   policy_arn = "arn:aws:iam::aws:policy/PowerUserAccess"
-#   role       = aws_iam_role.codebuild-role.id
-# }
+resource "aws_iam_role_policy_attachment" "tf-cicd-codebuild-attachment2" {
+  policy_arn = "arn:aws:iam::aws:policy/PowerUserAccess"
+  role       = aws_iam_role.codebuild-role.id
+}
 
 # resource "aws_iam_role_policy_attachment" "tf-cicd-codebuild-attachment3" {
 #   policy_arn = "arn:aws:iam::aws:policy/CodePipeline"
