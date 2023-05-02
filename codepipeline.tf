@@ -81,7 +81,7 @@ resource "aws_codepipeline" "cicd_pipeline" {
             owner = "AWS"
             provider = "CodeStarSourceConnection"
             version = "1"
-            output_artifacts = ["source_output"]
+            output_artifacts = ["tf-cicd"]
             configuration = {
                 FullRepositoryId = "mayur0319/CICD_repository"
                 BranchName   = "main"
@@ -99,8 +99,8 @@ resource "aws_codepipeline" "cicd_pipeline" {
             provider = "CodeBuild"
             version = "1"
             owner = "AWS"
-            input_artifacts = ["source_output"]
-            output_artifacts = ["build_output"]
+            input_artifacts = ["tf-cicd"]
+            output_artifacts = ["tf-cicd"]
             configuration = {
                 ProjectName = "tf-cicd-plan"
             }
@@ -115,7 +115,7 @@ resource "aws_codepipeline" "cicd_pipeline" {
             provider = "CodeBuild"
             version = "1"
             owner = "AWS"
-            input_artifacts = ["build_output"]
+            input_artifacts = ["tf-cicd"]
             configuration = {
                 ProjectName = "tf-cicd-apply"
             }
