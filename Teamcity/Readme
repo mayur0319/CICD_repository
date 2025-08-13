@@ -14,6 +14,30 @@ The pipeline is configured to:
 
 ### **Infrastructure**
 - **TeamCity Server** and **TeamCity Agent** running (Docker setup from JetBrains official images)
+```bash
+docker-compose up -d
+```
+- **✅ 1. Confirm the agent is running**
+Run this to check the containers:
+```bash
+docker ps
+```
+- **✅ 2. Open TeamCity UI**
+1. Go to: http://localhost:8111
+2. Set up the server if it's your first time (configure data directory, database, etc.).
+
+- **✅ 3. Authorize the Agent**
+By default, TeamCity requires you to manually authorize new agents:
+
+Steps:
+1. Login to TeamCity UI as admin.
+2. Navigate to: Agents → Unauthorized
+You’ll see the teamcity-agent listed there.
+
+Click "Authorize" to allow it to run builds.
+
+Once authorized, it will show under the Connected tab.
+
 - Agent has:
   - Terraform installed
   - Access to the target cloud provider (AWS, Azure, GCP, etc.)
