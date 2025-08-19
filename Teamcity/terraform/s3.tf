@@ -1,6 +1,6 @@
 # create S3 Bucket:
 resource "aws_s3_bucket" "bucket" {
-  bucket        = var.bucket_name
+  #   bucket        = var.bucket_name
   bucket_prefix = var.bucket_prefix
   tags = {
     "Project"   = "hands-on.cloud"

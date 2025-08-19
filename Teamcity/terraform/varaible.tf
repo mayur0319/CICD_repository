@@ -13,7 +13,7 @@ variable "bucket_name" {
 variable "bucket_prefix" {
   type        = string
   description = "The prefix for the S3 bucket"
-  default     = "tf-s3-website-"
+  default     = "TeamCity-Terraform-Demo-mayur"
 }
 variable "domain_name" {
   type        = string
