@@ -3,7 +3,7 @@ resource "aws_s3_bucket" "demo_bucket" {
 
   tags = {
     Name        = var.bucket_name
-    Environment = "TeamCity-Terraform-Demo"
+    Environment = "TeamCity-Terraform-Demo-mayur"
   }
 }
 
