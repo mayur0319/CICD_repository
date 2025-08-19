@@ -127,3 +127,36 @@ terraform/
 
 
 
+
+
+
+
+bash
+```
+# Download Terraform
+curl -o /tmp/terraform.zip https://releases.hashicorp.com/terraform/1.9.6/terraform_1.9.6_linux_amd64.zip
+
+# Make local folder
+mkdir -p $PWD/terraform-bin
+
+# Unzip to local folder
+unzip -o /tmp/terraform.zip -d $PWD/terraform-bin
+
+# Add to PATH for this build
+export PATH=$PWD/terraform-bin:$PATH
+
+# Verify
+terraform version
+
+
+
+
+export PATH=$PWD/terraform-bin:$PATH
+cd Teamcity/terraform
+terraform init -input=false
+
+
+export PATH=$PWD/terraform-bin:$PATH
+cd Teamcity/terraform
+terraform plan -input=false -out=tfplan
+```
