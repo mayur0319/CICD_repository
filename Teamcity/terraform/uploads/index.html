@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>S3 Website</title>
@@ -26,4 +26,52 @@
             <img src="https://static.india.com/wp-content/uploads/2018/08/kasol1.jpg?impolicy=Medium_Resize&w=1200&h=800" alt="Kasol"/>
         </div>
       
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>S3 Website</title>
+    <style>
+        .container{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container img{
+            width : 800px;
+            height: auto;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>S3 Website</h1>
+        <p>This website is being hosted on Amazon S3!</p>
+        <p>Here is a random view</p>
+        <img id="randomImage" src="" alt="Random Place"/>
+    </div>
+
+    <script>
+        // Array of image URLs
+        const images = [
+            "https://static.india.com/wp-content/uploads/2018/08/kasol1.jpg?impolicy=Medium_Resize&w=1200&h=800",
+            "https://www.holidify.com/images/bgImages/MANALI.jpg",
+            "https://www.tourmyindia.com/socialimg/shimla-himachal-pradesh.jpg",
+            "https://www.holidify.com/images/cmsuploads/compressed/attr_wiki_2277_20200716131232.jpg",
+            "https://www.holidify.com/images/bgImages/LEH.jpg"
+        ];
+
+        // Pick random image
+        const randomImage = images[Math.floor(Math.random() * images.length)];
+
+        // Set image source
+        document.getElementById("randomImage").src = randomImage;
+    </script>
+</body>
 </html>
